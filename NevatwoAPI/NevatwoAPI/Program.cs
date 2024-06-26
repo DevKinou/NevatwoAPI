@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using NevatwoAPI.BDD;
+using NevatwoAPI.Controllers;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -10,6 +14,11 @@ internal class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        // Configure NevaTwoDbContext
+        builder.Services.AddDbContext<NevaTwoDbContext>(options =>
+            options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+            ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
         var app = builder.Build();
 

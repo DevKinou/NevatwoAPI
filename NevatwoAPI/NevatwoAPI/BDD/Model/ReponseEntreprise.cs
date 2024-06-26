@@ -5,7 +5,7 @@
         public int id { get; set; }
         public int? entreprise_id { get; set; }
         public int? question_id { get; set; }
-        public int? response_value { get; set; }
+        public int? reponse_value { get; set; }
         public string? commentaire { get; set; }
     }
 }

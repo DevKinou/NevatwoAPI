@@ -17,7 +17,7 @@ namespace NevatwoAPI.Controllers
         }
 
         // Liste des réponses
-        [HttpGet("grilles")]
+        //[HttpGet("grilles")]
         //public IActionResult GetGrilles()
         //{
         //}
@@ -49,7 +49,10 @@ namespace NevatwoAPI.Controllers
         public IActionResult GetQuestionsSinceCategorie(string categorie)
         {
             logger.Info($"Une demande de récupération des questions pour la catégorie {categorie} a été effectuée");
-            List<string?> listQuestions = _context.Questions.Where(c => c.item.Contains(categorie)).Select(c => c.libelle).Distinct().ToList();
+            List<string?> listQuestions = _context.Questions.Where(c => c.item.Contains(categorie))
+                                                            .Select(c => c.libelle)
+                                                            .Distinct()
+                                                            .ToList();
 
             if (listQuestions.Count == 0)
             {
@@ -65,7 +68,7 @@ namespace NevatwoAPI.Controllers
         public IActionResult GetQuestionsSinceQuery(string q)
         {
             logger.Info($"Recherche de questions contenant: {q}");
-            var questions = _context.Questions
+            List<string?> questions = _context.Questions
                                     .Where(question => question.libelle.Contains(q))
                                     .Select(question => question.libelle)
                                     .Distinct()

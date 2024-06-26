@@ -1,0 +1,6 @@
+@NevatwoAPI_HostAddress = http://localhost:5152
+
+GET {{NevatwoAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

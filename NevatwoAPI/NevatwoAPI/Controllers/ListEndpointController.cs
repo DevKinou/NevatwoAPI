@@ -16,8 +16,8 @@ namespace NevatwoAPI.Controllers
             _context = context;
         }
 
-        // Liste des grilles
-        //[HttpGet("grilles")]
+        // Liste des réponses
+        [HttpGet("grilles")]
         //public IActionResult GetGrilles()
         //{
         //}
@@ -60,10 +60,24 @@ namespace NevatwoAPI.Controllers
             return Ok(listQuestions);
         }
 
-        //[HttpGet("/search/questions?q=query")]
-        //public IActionResult GetQuestionsSinceQuery(string query)
-        //{
-        //   
-        //}
+        //Recherche de questions
+        [HttpGet("/search/questions")]
+        public IActionResult GetQuestionsSinceQuery(string q)
+        {
+            logger.Info($"Recherche de questions contenant: {q}");
+            var questions = _context.Questions
+                                    .Where(question => question.libelle.Contains(q))
+                                    .Select(question => question.libelle)
+                                    .Distinct()
+                                    .ToList();
+
+            if (!questions.Any())
+            {
+                logger.Warn($"Aucune question trouvée contenant: {q}");
+                return NotFound();
+            }
+
+            return Ok(questions);
+        }
     }
 }

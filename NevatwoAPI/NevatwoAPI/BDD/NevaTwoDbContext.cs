@@ -16,10 +16,5 @@ namespace NevatwoAPI.BDD
         public NevaTwoDbContext(DbContextOptions<NevaTwoDbContext> options) : base(options)
         {
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
     }
 }

@@ -25,3 +25,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: ./NevatwoAPI
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@v2.1.0 
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

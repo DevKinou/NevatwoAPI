@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NevatwoAPI.BDD;
+using NevatwoAPI.BDD.Model;
 using NevatwoAPI.Json;
 using NLog;
 using System.Text;
@@ -19,7 +20,6 @@ namespace NevatwoAPI.Controllers
         }
 
         #region Get
-        // Liste des réponses
         // Doit récupérer l'ensemble de la liste des réponses d'une entreprise
         [HttpGet("grilles")]
         public IActionResult GetGrilles(int idEntreprise)
@@ -55,10 +55,34 @@ namespace NevatwoAPI.Controllers
         }
 
         //Liste des axes d'une grille
-        //[HttpGet("grilles/{id}/axes")]
-        //public IActionResult GetAxesSinceGrilles (int id)
-        //{
-        //}
+        [HttpGet("grilles/{idAxe}/axes")]
+        public IActionResult GetAxesSinceGrilles(int idAxe, int idEntreprise)
+        {
+            logger.Info($"Une demande de récupération des axes pour une grille a été effectuée");
+
+            var responses = _context.ReponseEntreprise
+                .Where(re => re.entreprise_id == idEntreprise)
+                .Join(_context.Questions,
+                      re => re.question_id,
+                      q => q.id,
+                      (re, q) => new { re, q })
+                .Where(combined => combined.q.axe == idAxe)
+                .Select(combined => new
+                {
+                    Question = combined.q.libelle,
+                    ResponseValue = combined.re.reponse_value,
+                    Comment = combined.re.commentaire
+                })
+                .ToList();
+
+            if (!responses.Any())
+            {
+                logger.Warn($"Aucune réponse n'a été trouvée pour l'entreprise {idEntreprise} et l'axe {idAxe}");
+                return NotFound();
+            }
+
+            return Ok(responses);
+        }
 
         //Liste des catégories d'un axe
         [HttpGet("axes/{id}/categories")]
@@ -115,7 +139,34 @@ namespace NevatwoAPI.Controllers
             return Ok(questions);
         }
         #endregion
+        // Permet d'ajouter une reponse à une question pour une entreprise en BDD
+        [HttpPost("questions/{idQuestion}/reponses")]
+        public IActionResult PostReponse(int idQuestion, [FromBody] RootDataReponseQuestion reponse)
+        {
+            logger.Info($"Une réponse a été ajoutée pour la question {idQuestion}");
 
-        //[HttpPost("")]
+            if (reponse == null)
+            {
+                logger.Warn("La réponse est vide");
+                return BadRequest();
+            }
+
+            if(reponse.ReponseValue < 0 || reponse.ReponseValue > 2)
+            {
+                logger.Warn("La valeur de la réponse doit être comprise entre 0 et 2");
+                return BadRequest();
+            }
+
+            _context.ReponseEntreprise.Add(new ReponseEntreprise
+            {
+                entreprise_id = reponse.EntrepriseId,
+                question_id = idQuestion,
+                reponse_value = reponse.ReponseValue,
+                commentaire = reponse.Commentaire
+            });
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

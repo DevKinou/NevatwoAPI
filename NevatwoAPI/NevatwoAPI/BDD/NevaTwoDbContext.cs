@@ -6,9 +6,6 @@ namespace NevatwoAPI.BDD
 {
     public class NevaTwoDbContext : DbContext
     {
-        private readonly IConfiguration _config;
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
         //DbSet declarations
         public DbSet<Questions> Questions { get; set; }
         public DbSet<Reponses> Reponses { get; set; }

@@ -32,5 +32,5 @@ jobs:
       with: 
         projectBaseDir: ./NevatwoAPI
         args: >
-          -Dsonar.organization=DevKinou
+          -Dsonar.organization=bachelorcdaressourcesrelationnelles2024
           -Dsonar.projectKey=DevKinou_NevatwoAPI

@@ -18,8 +18,9 @@ namespace NevatwoAPI.Controllers
             _context = context;
         }
 
+        #region Get
         // Liste des réponses
-        //Doit récupérer l'ensemble de la liste des réponses d'une entreprise
+        // Doit récupérer l'ensemble de la liste des réponses d'une entreprise
         [HttpGet("grilles")]
         public IActionResult GetGrilles(int idEntreprise)
         {
@@ -79,7 +80,7 @@ namespace NevatwoAPI.Controllers
         [HttpGet("categories/{categorie}/questions")]
         public IActionResult GetQuestionsSinceCategorie(string categorie)
         {
-            logger.Info($"Une demande de récupération des questions pour la catégorie {categorie} a été effectuée");
+            logger.Info($"Une demande de récupération des questions pour une catégorie a été effectuée");
             List<string?> listQuestions = _context.Questions.Where(c => c.item.Contains(categorie))
                                                             .Select(c => c.libelle)
                                                             .Distinct()
@@ -113,5 +114,6 @@ namespace NevatwoAPI.Controllers
 
             return Ok(questions);
         }
+        #endregion
     }
 }

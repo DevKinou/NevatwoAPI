@@ -3,7 +3,6 @@ using NevatwoAPI.BDD;
 using NevatwoAPI.BDD.Model;
 using NevatwoAPI.Json;
 using NLog;
-using System.Text;
 
 namespace NevatwoAPI.Controllers
 {
@@ -139,6 +138,7 @@ namespace NevatwoAPI.Controllers
             return Ok(questions);
         }
         #endregion
+
         // Permet d'ajouter une reponse à une question pour une entreprise en BDD
         [HttpPost("questions/{idQuestion}/reponses")]
         public IActionResult PostReponse(int idQuestion, [FromBody] RootDataReponseQuestion reponse)

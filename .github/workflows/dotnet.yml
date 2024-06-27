@@ -29,3 +29,8 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@v2.1.0 
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with: 
+        projectBaseDir: ./NevatwoAPI
+        args: >
+          -Dsonar.organization=DevKinou
+          -Dsonar.projectKey=bachelorcdaressourcesrelationnelles2024

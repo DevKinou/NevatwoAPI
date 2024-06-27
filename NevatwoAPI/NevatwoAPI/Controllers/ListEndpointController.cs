@@ -115,5 +115,7 @@ namespace NevatwoAPI.Controllers
             return Ok(questions);
         }
         #endregion
+
+        //[HttpPost("")]
     }
 }

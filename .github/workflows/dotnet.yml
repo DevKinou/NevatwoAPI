@@ -30,7 +30,6 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with: 
-        projectBaseDir: ./NevatwoAPI
         args: >
           -Dsonar.organization=bachelorcdaressourcesrelationnelles2024
           -Dsonar.projectKey=DevKinou_NevatwoAPI

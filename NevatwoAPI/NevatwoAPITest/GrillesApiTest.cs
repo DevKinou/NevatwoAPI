@@ -14,11 +14,11 @@ public class ListEndpointControllerTests
     public void GetGrilles_ReturnsOkObjectResult_WithListOfGrilles()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<NevaTwoDbContext>()
+        DbContextOptions<NevaTwoDbContext> options = new DbContextOptionsBuilder<NevaTwoDbContext>()
             .UseInMemoryDatabase(databaseName: "TestDatabaseForGetGrilles")
             .Options;
 
-        using (var context = new NevaTwoDbContext(options))
+        using (NevaTwoDbContext context = new NevaTwoDbContext(options))
         {
             context.ReponseEntreprise.AddRange(
                 new ReponseEntreprise { entreprise_id = 1, question_id = 1, reponse_value = 1, commentaire = "Comment 1" },
@@ -34,16 +34,16 @@ public class ListEndpointControllerTests
             context.SaveChanges();
         }
 
-        using (var context = new NevaTwoDbContext(options))
+        using (NevaTwoDbContext context = new NevaTwoDbContext(options))
         {
-            var controller = new ListEndpointController(context);
+            ListEndpointController controller = new ListEndpointController(context);
 
             // Act
-            var result = controller.GetGrilles(1);
+            IActionResult result = controller.GetGrilles(1);
 
             // Assert
-            var okResult = Xunit.Assert.IsType<OkObjectResult>(result);
-            var returnValue = Xunit.Assert.IsType<List<GrilleCompleteEntrepriseJson>>(okResult.Value);
+            OkObjectResult okResult = Xunit.Assert.IsType<OkObjectResult>(result);
+            List<GrilleCompleteEntrepriseJson> returnValue = Xunit.Assert.IsType<List<GrilleCompleteEntrepriseJson>>(okResult.Value);
             Xunit.Assert.NotEmpty(returnValue);
         }
     }

@@ -5,9 +5,14 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NevatwoAPI", "NevatwoAPI\NevatwoAPI.csproj", "{4EB1D4F6-39BC-4341-AB18-6A94F340158C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NevatwoAPITest", "NevatwoAPITest\NevatwoAPITest.csproj", "{7680A11A-1F22-4BC6-A0B9-095D0E776DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NevatwoAPITest", "NevatwoAPITest\NevatwoAPITest.csproj", "{7680A11A-1F22-4BC6-A0B9-095D0E776DCE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4EB1D4F6-39BC-4341-AB18-6A94F340158C} = {4EB1D4F6-39BC-4341-AB18-6A94F340158C}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF3CF68B-AA03-4006-9021-942D1CC435AB}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

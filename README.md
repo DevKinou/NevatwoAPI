@@ -1,3 +1,5 @@
+**/!\ GROUPE 4 /!\**
+
 **APERÇU DES ENDPOINTS**  
 
 **1. Obtenir les Grilles (Grilles Complètes pour une Entreprise)**  

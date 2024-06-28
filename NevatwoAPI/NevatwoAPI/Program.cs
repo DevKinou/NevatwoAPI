@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using NevatwoAPI.BDD;
-using NevatwoAPI.Controllers;
 
 internal class Program
 {

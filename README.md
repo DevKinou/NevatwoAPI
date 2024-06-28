@@ -1,4 +1,4 @@
-**/!\ GROUPE 4 /!\**
+*/!\ GROUPE 4 /!\*
 
 **APERÇU DES ENDPOINTS**  
 
